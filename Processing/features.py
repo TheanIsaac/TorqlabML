@@ -671,5 +671,13 @@ def extract_features_for_active_segment(
     Return dict of features.
     """
     rtd = compute_rtd_features(active, onset_time, sr, (0, 75), (100, 200))
-    pl  = compute_plateau_features(active, sr, plateau_window_ms, plateau_step_ms, plateau_cov_cap)
+    pl = compute_plateau_features(
+        active,
+        sr,
+        confidence_level=0.99,
+        use_new_method=True,
+        window_ms=plateau_window_ms,
+        step_ms=plateau_step_ms,
+        cov_cap=plateau_cov_cap,
+    )
     return {**rtd, **pl}
